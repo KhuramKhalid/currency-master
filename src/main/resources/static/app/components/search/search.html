@@ -1,0 +1,51 @@
+<div ng-controller="CurMasSearchController">
+    <div class="portlet light">
+        <div class="portlet-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Search by Currency Code</label>
+                        <div class="input-icon left">
+                            <i class="fa fa-bitcoin"></i>
+                            <input data-ng-model="currencyCode" type="text" data-ng-change="searchByCode(currencyCode)"
+                                   class="form-control input-circle"> </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Search by Description</label>
+                        <div class="input-icon left">
+                            <i class="fa fa-align-left"></i>
+                            <input data-ng-model="currencyDescription" type="text"  data-ng-change="searchByDescription(currencyDescription)"
+                                   class="form-control input-circle"> </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label>Search by Status</label>
+                    <select class="form-control input-circle"
+                            data-ng-model="status" data-ng-change="searchByStatus(status)"
+                            data-ng-options="status as status.description for status in statuses">
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="portlet light">
+        <div class="portlet-title">
+            <div class="caption caption-md">
+                <i class="icon-magnifier"></i>
+                <span class="caption-subject font-blue-madison bold uppercase">Search Results</span>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <h6 data-ng-if="searchResults.length < 1" class="text-center">nothing to show</h6>
+
+            <div class="row" data-ng-repeat="currency in searchResults">
+                <div class="col-md-4">{{currency.currencyCode}}</div>
+                <div class="col-md-4">{{currency.currencyDescription}}</div>
+                <div class="col-md-4" data-ng-class="currency.status.status == 'I' ? 'font-red-soft uppercase' : 'font-green-soft'">{{currency.status.description}}</div>
+            </div>
+        </div>
+    </div>
+</div>

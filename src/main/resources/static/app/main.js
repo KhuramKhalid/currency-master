@@ -114,11 +114,11 @@ CURMASApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvide
 
     $stateProvider
 
-        // Home
+        /* Home */
         .state('home', {
             url: "/",
             templateUrl: "app/components/curmas/curmas.html",
-            data: {pageTitle: 'Currency Master Maintenance'},
+            data: {pageTitle: 'Currencies'},
             resolve: {
                 deps: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load({
@@ -131,8 +131,55 @@ CURMASApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvide
                             'assets/global/plugins/jquery.sparkline.min.js',
 
                             'app/services/TableAPI.js',
-                            'app/components/curmas/curmas.js',
                             'app/components/curmas/CURMASController.js',
+                        ]
+                    });
+                }]
+            }
+        })
+
+        /* Create */
+        .state('create', {
+            url: "/add",
+            templateUrl: "app/components/create/create.html",
+            data: {pageTitle: 'Add New Currency'},
+            resolve: {
+                deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'CURMASApp',
+                        insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
+                        files: [
+                            'assets/global/plugins/morris/morris.css',
+                            'assets/global/plugins/morris/morris.min.js',
+                            'assets/global/plugins/morris/raphael-min.js',
+                            'assets/global/plugins/jquery.sparkline.min.js',
+
+                            'app/services/TableAPI.js',
+                            'app/components/create/CreateController.js',
+                        ]
+                    });
+                }]
+            }
+        })
+
+        /* Search */
+        .state('search', {
+            url: "/search",
+            templateUrl: "app/components/search/search.html",
+            data: {pageTitle: 'Search for Currencies'},
+            resolve: {
+                deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'CURMASApp',
+                        insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
+                        files: [
+                            'assets/global/plugins/morris/morris.css',
+                            'assets/global/plugins/morris/morris.min.js',
+                            'assets/global/plugins/morris/raphael-min.js',
+                            'assets/global/plugins/jquery.sparkline.min.js',
+
+                            'app/services/TableAPI.js',
+                            'app/components/search/SearchController.js',
                         ]
                     });
                 }]

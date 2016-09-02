@@ -1,3 +1,85 @@
 <div ng-controller="CurMasController">
-    {{test}}
+    <div class="portlet light">
+        <div class="portlet-body">
+            <h6 data-ng-if="allCurrencies.length < 1">No currencies to show</h6>
+            <div class="table-scrollable table-scrollable-borderless" data-ng-if="allCurrencies.length > 0">
+                <table class="table table-hover table-light">
+                    <thead>
+                    <tr class="uppercase">
+                        <th> Currency Code </th>
+                        <th> Description </th>
+                        <th> Status </th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tr data-ng-repeat="currency in allCurrencies | orderBy:'currencyCode'">
+                        <td>
+                            <a href="" data-ng-click="editCurrency(currency)" class="primary-link">{{currency.currencyCode}}</a>
+                        </td>
+
+                        <td data-ng-hide="currency.editMode"> {{currency.currencyDescription}} </td>
+                        <td data-ng-show="currency.editMode">
+                            <div class="form-group">
+                                <div class="input-icon left">
+                                    <i class="fa fa-align-left"></i>
+                                    <input data-ng-model="currency.currencyDescription" type="text" class="form-control input-circle"> </div>
+                            </div>
+                        </td>
+
+                        <td data-ng-hide="currency.editMode" data-ng-class="currency.status.status == 'I' ? 'font-red-soft uppercase' : 'font-green-soft'"> {{currency.status.description}} </td>
+                        <td data-ng-show="currency.editMode">
+                            <div class="form-group">
+                                <select class="form-control input-circle"
+                                        data-ng-model="currency.status"
+                                        data-ng-options="status as status.description for status in statuses">
+                                </select>
+                            </div>
+                        </td>
+
+                        <td data-ng-hide="currency.editMode" class="text-right">
+                            <span class="btn btn-circle btn-icon-only grey-mint" data-ng-click="addCurrencyFrom(currency)"><i class="icon-layers"></i></span>
+                            <span class="btn btn-circle btn-icon-only red-soft" data-ng-click="removeCurrency(currency)"><i class="fa fa-times"></i></span>
+                        </td>
+                        <td data-ng-show="currency.editMode" class="text-right">
+                            <span class="btn btn-circle btn-icon-only green-soft" data-ng-click="addNewCurrency(currency)"><i class="fa fa-check"></i></span>
+                        </td>
+                    </tr>
+                    <tr data-ng-if="createFromCopy.currencyCode" class="text-center">
+                        <td colspan="4"><h3>Create from Copy</h3></td>
+                    </tr>
+                    <tr data-ng-if="createFromCopy.currencyCode">
+                        <td>
+                            <div class="form-group">
+                                <label>Currency Code</label>
+                                <div class="input-icon left">
+                                    <i class="fa fa-bitcoin"></i>
+                                    <input data-ng-model="createFromCopy.currencyCode" type="text" class="form-control input-circle"> </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <label>Description</label>
+                                <div class="input-icon left">
+                                    <i class="fa fa-align-left"></i>
+                                    <input data-ng-model="createFromCopy.currencyDescription" type="text" class="form-control input-circle"> </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <label>Status</label>
+                                <select class="form-control input-circle"
+                                        data-ng-model="createFromCopy.status"
+                                        data-ng-options="status as status.description for status in statuses">
+                                </select>
+                            </div>
+                        </td>
+                        <td class="text-right">
+                            <span class="btn btn-circle btn-icon-only green-soft" data-ng-click="addNewCurrency(createFromCopy)"><i class="fa fa-plus"></i></span>
+                            <span class="btn btn-circle btn-icon-only grey" data-ng-click="ignoreCreateFrom()"><i class="icon-trash"></i></span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>

@@ -1,0 +1,36 @@
+<div ng-controller="CurMasAddController">
+    <div class="portlet light">
+        <div class="portlet-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Currency Code</label>
+                        <div class="input-icon left">
+                            <i class="fa fa-bitcoin"></i>
+                            <input data-ng-model="newCurrency.currencyCode" type="text" class="form-control input-circle"> </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Description</label>
+                        <div class="input-icon left">
+                            <i class="fa fa-align-left"></i>
+                            <input data-ng-model="newCurrency.currencyDescription" type="text" class="form-control input-circle"> </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label>Status</label>
+                    <select class="form-control input-circle"
+                            data-ng-model="newCurrency.status"
+                            data-ng-options="status as status.description for status in statuses">
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <span class="btn btn-circle green-soft" data-ng-click="addNewCurrency(newCurrency)">Add</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
